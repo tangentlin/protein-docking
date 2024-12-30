@@ -1,0 +1,26 @@
+{
+    "arrowParens": "avoid",
+    "bracketSameLine": true,
+    "bracketSpacing": true,
+    "importOrder": [
+      "@/shared/styles/globals.css",
+      "^.*\\.css$",
+      "^.*\\.scss$",
+      "^@fontsource",
+      "^react",
+      "<THIRD_PARTY_MODULES>",
+      "^@/.*",
+      "^../.*",
+      "^./.*"
+    ],
+    "importOrderSeparation": true,
+    "jsxBracketSameLine": true,
+    "jsxSingleQuote": true,
+    "plugins": ["@trivago/prettier-plugin-sort-imports"],
+    "printWidth": 120,
+    "proseWrap": "preserve",
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5"
+  }
+  

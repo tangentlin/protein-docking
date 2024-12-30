@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "target": "ES2022"
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "../backup/mol-viewer-backup.tsx",
+    "../backup/mol-viewer.stories.tsx",
+    "../backup/mol-viewer.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
