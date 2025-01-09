@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import withInteractionPdb from '../..//pose/ligand-interaction/example_prot.pdb?raw';
 import nonInteractionPdb from '../..//pose/non-interaction/example_prot.pdb?raw';
 import withInteractionSdf from '../../pose/ligand-interaction/example_lig.sdf?raw';
+import withInteractionPdb from '../../pose/ligand-interaction/example_prot.pdb?raw';
 import nonInteractionSdf from '../../pose/non-interaction/example_lig.sdf?raw';
 
 import { dockingDefaultColor } from './docking-color';
