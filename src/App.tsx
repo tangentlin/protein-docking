@@ -6,6 +6,7 @@ import withInteractionPdb from './pose/ligand-interaction/example_prot.pdb?raw';
 function App() {
   return (
     <DockingViewer
+      height='95vh'
       structures={[
         {
           structureData: withInteractionPdb,

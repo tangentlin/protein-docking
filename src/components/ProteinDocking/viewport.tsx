@@ -3,7 +3,7 @@
  *
  * @author Alexander Rose <alexander.rose@weirdbyte.de>
  */
-import { Button } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import { StructureRepresentationPresetProvider } from 'molstar/lib/mol-plugin-state/builder/structure/representation-preset';
 import { StructureRef } from 'molstar/lib/mol-plugin-state/manager/structure/hierarchy-state';
 import { PluginUIComponent } from 'molstar/lib/mol-plugin-ui/base';
@@ -22,6 +22,20 @@ import { SurfacePreset } from './presets/surface-preset';
 
 export const ShowButtons = PluginConfig.item('showButtons', true);
 
+const presets = [
+  StructurePreset,
+  IllustrativePreset,
+  SurfacePreset,
+  PocketPreset,
+  InteractionsPreset,
+  InteractionStructurePreset,
+];
+
+interface PresetDescriptor {
+  name: string;
+  activate: () => Promise<void>;
+}
+
 export class ViewportComponent extends PluginUIComponent {
   async _set(structures: readonly StructureRef[], preset: StructureRepresentationPresetProvider) {
     await this.plugin.managers.structure.component.clear(structures);
@@ -32,12 +46,20 @@ export class ViewportComponent extends PluginUIComponent {
     await this._set(this.plugin.managers.structure.hierarchy.selection.structures, preset);
   };
 
-  structurePreset = () => this.set(StructurePreset);
-  illustrativePreset = () => this.set(IllustrativePreset);
-  surfacePreset = () => this.set(SurfacePreset);
-  pocketPreset = () => this.set(PocketPreset);
-  interactionsPreset = () => this.set(InteractionsPreset);
-  interactionStructurePreset = () => this.set(InteractionStructurePreset);
+  private _presets: PresetDescriptor[] = [];
+  get presets() {
+    if (this._presets.length === 0) {
+      for (const preset of presets) {
+        this._presets.push({
+          name: preset.display.name,
+          activate: () => {
+            return this.set(preset);
+          },
+        });
+      }
+    }
+    return this._presets;
+  }
 
   get showButtons() {
     return this.plugin.config.get(ShowButtons);
@@ -50,26 +72,13 @@ export class ViewportComponent extends PluginUIComponent {
       <>
         <Viewport />
         {this.showButtons && (
-          <div className='msp-viewport-top-left-controls'>
-            <div style={{ marginBottom: '4px' }}>
-              <Button onClick={this.structurePreset}>Structure</Button>
-            </div>
-            <div style={{ marginBottom: '4px' }}>
-              <Button onClick={this.illustrativePreset}>Illustrative</Button>
-            </div>
-            <div style={{ marginBottom: '4px' }}>
-              <Button onClick={this.surfacePreset}>Surface</Button>
-            </div>
-            <div style={{ marginBottom: '4px' }}>
-              <Button onClick={this.pocketPreset}>Pocket</Button>
-            </div>
-            <div style={{ marginBottom: '4px' }}>
-              <Button onClick={this.interactionsPreset}>Interactions</Button>
-            </div>
-            <div style={{ marginBottom: '4px' }}>
-              <Button onClick={this.interactionStructurePreset}>Interactions (Cartoon)</Button>
-            </div>
-          </div>
+          <Stack direction={'column'} spacing={2} width='10rem'>
+            {this.presets.map(preset => (
+              <Button key={preset.name} variant='contained' onClick={preset.activate} color='primary'>
+                {preset.name}
+              </Button>
+            ))}
+          </Stack>
         )}
         <VPControls />
         <BackgroundTaskProgress />
