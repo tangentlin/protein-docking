@@ -20,7 +20,8 @@ import { ColorNames } from 'molstar/lib/mol-util/color/names';
 import { ParamDefinition } from 'molstar/lib/mol-util/param-definition';
 import { ObjectKeys } from 'molstar/lib/mol-util/type-helpers';
 
-import { ShowButtons, StructurePreset, ViewportComponent } from './viewport';
+import { StructurePreset } from './presets/structure-preset';
+import { ShowButtons, ViewportComponent } from './viewport';
 
 export { PLUGIN_VERSION as version } from 'molstar/lib/mol-plugin/version';
 export { setDebugMode, setProductionMode } from 'molstar/lib/mol-util/debug';
