@@ -15,6 +15,7 @@ import { PluginConfig } from 'molstar/lib/mol-plugin/config';
 
 import { IllustrativePreset } from './presets/illustrative-preset';
 import { InteractionsPreset } from './presets/interaction-preset';
+import { InteractionStructurePreset } from './presets/interaction-structure-preset';
 import { PocketPreset } from './presets/pocket-preset';
 import { StructurePreset } from './presets/structure-preset';
 import { SurfacePreset } from './presets/surface-preset';
@@ -36,6 +37,7 @@ export class ViewportComponent extends PluginUIComponent {
   surfacePreset = () => this.set(SurfacePreset);
   pocketPreset = () => this.set(PocketPreset);
   interactionsPreset = () => this.set(InteractionsPreset);
+  interactionStructurePreset = () => this.set(InteractionStructurePreset);
 
   get showButtons() {
     return this.plugin.config.get(ShowButtons);
@@ -63,6 +65,9 @@ export class ViewportComponent extends PluginUIComponent {
             </div>
             <div style={{ marginBottom: '4px' }}>
               <Button onClick={this.interactionsPreset}>Interactions</Button>
+            </div>
+            <div style={{ marginBottom: '4px' }}>
+              <Button onClick={this.interactionStructurePreset}>Interactions (Cartoon)</Button>
             </div>
           </div>
         )}
