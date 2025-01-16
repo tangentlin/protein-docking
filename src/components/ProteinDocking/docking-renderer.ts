@@ -1,7 +1,6 @@
 import 'molstar/lib/mol-plugin-ui/skin/dark.scss';
 import 'molstar/lib/mol-plugin-ui/skin/light.scss';
 
-import { ShowButtons, StructurePreset, ViewportComponent } from 'molstar/lib/apps/docking-viewer/viewport';
 import { Structure } from 'molstar/lib/mol-model/structure';
 import { BuiltInTrajectoryFormat } from 'molstar/lib/mol-plugin-state/formats/trajectory';
 import { PluginStateTransform, PluginStateObject } from 'molstar/lib/mol-plugin-state/objects';
@@ -20,6 +19,8 @@ import { Color } from 'molstar/lib/mol-util/color';
 import { ColorNames } from 'molstar/lib/mol-util/color/names';
 import { ParamDefinition } from 'molstar/lib/mol-util/param-definition';
 import { ObjectKeys } from 'molstar/lib/mol-util/type-helpers';
+
+import { ShowButtons, StructurePreset, ViewportComponent } from './viewport';
 
 export { PLUGIN_VERSION as version } from 'molstar/lib/mol-plugin/version';
 export { setDebugMode, setProductionMode } from 'molstar/lib/mol-util/debug';
@@ -166,7 +167,7 @@ class Viewer {
 
     // remove current structures from hierarchy as they will be merged
     // TODO only works with using loadStructuresFromUrlsAndMerge once
-    //      need some more API metho to work with the hierarchy
+    //      need some more API method to work with the hierarchy
     this.plugin.managers.structure.hierarchy.updateCurrent(
       this.plugin.managers.structure.hierarchy.current.structures,
       'remove'
