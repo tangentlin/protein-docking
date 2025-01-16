@@ -5,7 +5,6 @@ import {
   presetStaticComponent,
 } from 'molstar/lib/mol-plugin-state/builder/structure/representation-preset';
 import { StateObjectRef } from 'molstar/lib/mol-state';
-import { Color } from 'molstar/lib/mol-util/color';
 
 import { PresetParams, CustomMaterial, shinyStyle, ligandSurroundings } from './preset-common';
 
@@ -74,17 +73,17 @@ export const InteractionStructurePreset = StructureRepresentationPresetProvider(
         },
         { tag: 'interactions' }
       ),
-      label: builder.buildRepresentation(
-        update,
-        components.surroundings,
-        {
-          type: 'label',
-          typeParams: { ...typeParams, material: CustomMaterial, background: false, borderWidth: 0.1 },
-          color: 'uniform',
-          colorParams: { value: Color(0x000000) },
-        },
-        { tag: 'label' }
-      ),
+      // label: builder.buildRepresentation(
+      //   update,
+      //   components.surroundings,
+      //   {
+      //     type: 'label',
+      //     typeParams: { ...typeParams, material: CustomMaterial, background: false, borderWidth: 0.1 },
+      //     color: 'uniform',
+      //     colorParams: { value: Color(0x000000) },
+      //   },
+      //   { tag: 'label' }
+      // ),
     };
 
     await update.commit({ revertOnError: true });

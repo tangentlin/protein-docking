@@ -1,4 +1,3 @@
-import './index.css';
 import '@fontsource/inconsolata/300.css';
 import '@fontsource/inconsolata/400.css';
 import '@fontsource/inconsolata/500.css';

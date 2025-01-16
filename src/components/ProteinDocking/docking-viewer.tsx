@@ -26,7 +26,6 @@ const Container = styled('div')<{ height?: string }>`
   height: ${props => props.height ?? props.theme.spacing(37.5)};
   width: 100%;
   position: relative;
-  z-index: 10;
 `;
 
 export const DockingViewer: FunctionComponent<DockingViewerProp> = props => {
@@ -35,6 +34,7 @@ export const DockingViewer: FunctionComponent<DockingViewerProp> = props => {
   const previousStructureData = useRef<readonly DockingStructureDataModel[]>([]);
   const viewerRef = useRef<DockingRenderer | null>(null);
   const elementId = useId();
+  const isInit = useRef(false);
 
   const colors = useMemo<readonly number[]>(() => {
     const updatedColors = structures.map(t => t.color);
@@ -56,6 +56,11 @@ export const DockingViewer: FunctionComponent<DockingViewerProp> = props => {
   }, [structures]);
 
   useEffect(() => {
+    if (isInit.current) {
+      return;
+    }
+
+    isInit.current = true;
     DockingRenderer.create(elementId, colors, !hideButtons).then(async viewer => {
       // TODO: This may not work with updated data
       await viewer.loadStructuresFromUrlsAndMerge(structureData);

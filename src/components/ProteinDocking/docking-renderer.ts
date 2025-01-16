@@ -1,12 +1,13 @@
 import 'molstar/lib/mol-plugin-ui/skin/dark.scss';
 import 'molstar/lib/mol-plugin-ui/skin/light.scss';
 
+import { createRoot, Root } from 'react-dom/client';
+
 import { Structure } from 'molstar/lib/mol-model/structure';
 import { BuiltInTrajectoryFormat } from 'molstar/lib/mol-plugin-state/formats/trajectory';
 import { PluginStateTransform, PluginStateObject } from 'molstar/lib/mol-plugin-state/objects';
 import { createPluginUI } from 'molstar/lib/mol-plugin-ui';
 import { PluginUIContext } from 'molstar/lib/mol-plugin-ui/context';
-import { renderReact18 } from 'molstar/lib/mol-plugin-ui/react18';
 import { DefaultPluginUISpec, PluginUISpec } from 'molstar/lib/mol-plugin-ui/spec';
 import { PluginBehaviors } from 'molstar/lib/mol-plugin/behavior';
 import { PluginCommands } from 'molstar/lib/mol-plugin/commands';
@@ -52,6 +53,7 @@ const DefaultViewerOptions = {
 };
 
 class Viewer {
+  static root: Root | null = null;
   constructor(public plugin: PluginUIContext) {}
 
   static async create(
@@ -128,7 +130,16 @@ class Viewer {
 
     const element = typeof elementOrId === 'string' ? document.getElementById(elementOrId) : elementOrId;
     if (!element) throw new Error(`Could not get element with id '${elementOrId}'`);
-    const plugin = await createPluginUI({ target: element, spec, render: renderReact18 });
+    const plugin = await createPluginUI({
+      target: element,
+      spec,
+      render: (el, target) => {
+        if (!Viewer.root) {
+          Viewer.root = createRoot(target);
+        }
+        Viewer.root.render(el);
+      },
+    });
 
     (plugin.customState as any) = {
       colorPalette: {
