@@ -14,6 +14,7 @@ import { Viewport, ViewportControls } from 'molstar/lib/mol-plugin-ui/viewport';
 import { PluginConfig } from 'molstar/lib/mol-plugin/config';
 
 import { IllustrativePreset } from './presets/illustrative-preset';
+import { Interaction3Preset } from './presets/interaction-3-preset';
 import { InteractionsPreset } from './presets/interaction-preset';
 import { InteractionStructurePreset } from './presets/interaction-structure-preset';
 import { PocketPreset } from './presets/pocket-preset';
@@ -29,6 +30,7 @@ const presets = [
   PocketPreset,
   InteractionsPreset,
   InteractionStructurePreset,
+  Interaction3Preset,
 ];
 
 interface PresetDescriptor {
